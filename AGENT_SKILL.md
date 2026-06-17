@@ -36,10 +36,12 @@ These endpoints do not require a token:
 This endpoint requires `Authorization: Bearer {token}`:
 
 - `DELETE /api/auth/token`
+- `POST /api/node/mine`
+
 
 ## How to discover the contract
 
-1. Read [DOCS.md](./DOCS.md) for the full human-facing usage guide.
+1. Read [DOCS.md](./README.md) for the full human-facing usage guide.
 2. Run `php artisan route:list` to verify the available endpoints and middleware.
 3. Run `php artisan test` to confirm the current behavior.
 

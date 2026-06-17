@@ -897,7 +897,81 @@
                     </div>
                 </div>
 
+                <!-- POST /api/node/mine -->
+                <div class="endpoint-card" data-category="node">
+                    <div class="endpoint-trigger">
+                        <div class="endpoint-identity">
+                            <span class="method-badge post">POST</span>
+                            <span class="endpoint-path">/api/node/mine</span>
+                        </div>
+                        <span class="endpoint-summary">Mina 1 bloque en el nodo regtest.</span>
+                        <span class="endpoint-icon">▼</span>
+                    </div>
+                    <div class="endpoint-content">
+                        <div class="content-grid">
+                            <div class="details-col">
+                                <div>
+                                    <h4 class="details-section-title">Descripción</h4>
+                                    <p class="details-text">Genera exactamente 1 bloque de prueba de forma manual enviando la recompensa coinbase a una dirección específica. Su uso está regulado por un cooldown global configurable (<code>MINING_COOLDOWN_SECONDS</code>).</p>
+                                </div>
+                                <div>
+                                    <h4 class="details-section-title">Autorización Requerida</h4>
+                                    <p class="details-text" style="color: var(--method-delete);">
+                                        <strong>Bearer Token:</strong> Requiere enviar el header <code>Authorization: Bearer {token}</code>
+                                    </p>
+                                </div>
+                                <div>
+                                    <h4 class="details-section-title">Parámetros del Body (JSON)</h4>
+                                    <table class="param-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Campo</th>
+                                                <th>Tipo</th>
+                                                <th>Requerido</th>
+                                                <th>Descripción</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="param-name">address</td>
+                                                <td class="param-type">string</td>
+                                                <td><span class="param-badge required">Sí</span></td>
+                                                <td>Dirección BTC destino del subsidio de bloque.</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="code-col">
+                                <div class="code-box">
+                                    <div class="code-header">
+                                        <span>Ejemplo de cURL</span>
+                                        <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+                                    </div>
+                                    <pre><code>curl -X POST {{ url('/api/node/mine') }} \
+  -H "Authorization: Bearer {token}" \
+  -H "Content-Type: application/json" \
+  -d '{"address":"bcrt1qexampleaddress"}'</code></pre>
+                                </div>
+
+                                <div class="code-box">
+                                    <div class="code-header">
+                                        <span>Respuesta (200 OK)</span>
+                                    </div>
+                                    <pre><code>{
+  "message": "Blocks mined successfully.",
+  "block_hashes": [
+    "00000000aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  ]
+}</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- GET /api/node/info -->
+
                 <div class="endpoint-card" data-category="node">
                     <div class="endpoint-trigger">
                         <div class="endpoint-identity">

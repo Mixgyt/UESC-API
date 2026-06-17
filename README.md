@@ -165,7 +165,42 @@ Response:
 204 No Content
 ```
 
+### POST /api/node/mine
+
+Descripcion: mina exactamente 1 bloque en el nodo regtest enviando la recompensa coinbase a una direccion especifica. Posee un cooldown global regulado por `MINING_COOLDOWN_SECONDS`. Requiere autenticacion por token.
+
+Request:
+
+```bash
+curl -X POST http://127.0.0.1:8000/api/node/mine \
+  -H "Authorization: Bearer {token}" \
+  -H "Content-Type: application/json" \
+  -d '{"address":"bcrt1qexampleaddress"}'
+```
+
+
+Response (200 OK):
+
+```json
+{
+  "message": "Blocks mined successfully.",
+  "block_hashes": [
+    "00000000aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  ]
+}
+```
+
+Response (429 Too Many Requests):
+
+```json
+{
+  "message": "Mining is on cooldown.",
+  "remaining_seconds": 115
+}
+```
+
 ### GET /api/node/info
+
 
 Descripcion: retorna informacion general del nodo y de la red.
 

@@ -7,4 +7,6 @@ return [
     'password' => env('BITCOIN_RPC_PASSWORD', 'regtest'),
     'wallet' => env('BITCOIN_RPC_WALLET', ''),
     'timeout' => (float) env('BITCOIN_RPC_TIMEOUT', 10.0),
+    'mining_cooldown' => (int) env('MINING_COOLDOWN_SECONDS', 120),
 ];
+

@@ -77,7 +77,16 @@ class BitcoinRpcService
     /**
      * @param array<int, mixed> $params
      */
+    public function generateToAddress(int $blocks, string $address): array
+    {
+        return $this->call('generatetoaddress', [$blocks, $address]);
+    }
+
+    /**
+     * @param array<int, mixed> $params
+     */
     private function call(string $method, array $params = []): mixed
+
     {
         try {
             return $this->rpc->{$method}(...$params)->result();

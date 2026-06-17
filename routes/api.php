@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Route;
 Route::post('/auth/token', [AuthController::class, 'token']);
 
 Route::delete('/auth/token', [AuthController::class, 'revoke'])->middleware('auth:sanctum');
+Route::post('/node/mine', [NodeController::class, 'mine'])->middleware('auth:sanctum');
+
 
 Route::middleware('throttle:60,1')->group(function (): void {
     Route::get('/node/info', [NodeController::class, 'info']);
