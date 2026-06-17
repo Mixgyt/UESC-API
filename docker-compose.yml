@@ -1,0 +1,25 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: dockerfile
+    env_file:
+      - .env
+    volumes:
+      - storage_app:/var/www/storage/app
+      - storage_logs:/var/www/storage/logs
+    restart: unless-stopped
+    networks:
+      - dokploy-network
+
+
+volumes:
+  storage_app:
+    driver: local
+  storage_logs:
+    driver: local
+
+networks:
+  dokploy-network:
+    external: true
+
