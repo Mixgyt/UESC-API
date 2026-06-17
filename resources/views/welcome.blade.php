@@ -715,6 +715,10 @@
                 UESC-API
             </div>
             <div class="header-links">
+                <a href="/mempool" class="btn btn-outline" style="border-color: oklch(69% 0.19 50 / 30%); color: var(--btc-orange); display: flex; align-items: center; gap: 0.35rem;">
+                    <span class="indicator online" style="width: 6px; height: 6px;"></span>
+                    Mempool en Vivo
+                </a>
                 <a href="#endpoints" class="btn btn-outline">Explorador</a>
                 <a href="/api/node/info" target="_blank" class="btn btn-primary">
                     Probar API
@@ -733,9 +737,13 @@
                 <p class="hero-desc">
                     Esta API REST actúa como puente entre un nodo <strong>Bitcoin Core (regtest)</strong> local y aplicaciones móviles o sistemas externos. Mantiene los valores en satoshis y expone bloques, transacciones y mempool en tiempo real de forma segura y optimizada.
                 </p>
-                <div style="display: flex; gap: 0.75rem;">
+                <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
                     <a href="#endpoints" class="btn btn-primary">Ver endpoints</a>
-                    <a href="https://github.com" target="_blank" class="btn btn-outline">Repositorio</a>
+                    <a href="/mempool" class="btn btn-outline" style="border-color: var(--btc-orange); color: var(--btc-orange); display: flex; align-items: center; gap: 0.35rem;">
+                        <span class="indicator online" style="width: 6px; height: 6px;"></span>
+                        Mempool en Vivo
+                    </a>
+                    <a href="https://github.com/mixgyt/UESC-api" target="_blank" class="btn btn-outline">Repositorio</a>
                 </div>
             </div>
 
