@@ -317,6 +317,7 @@
             font-size: 0.9rem;
             outline: none;
             width: 300px;
+            max-width: 100%;
             transition: all 0.2s ease;
         }
 
@@ -536,6 +537,218 @@
         .loading-overlay.hidden {
             opacity: 0;
             pointer-events: none;
+        }
+
+        /* ===== RESPONSIVE MOBILE FIXES ===== */
+
+        /* Tablet & small laptops */
+        @media (max-width: 950px) {
+            .container {
+                padding: 1.5rem 1rem;
+                gap: 1.5rem;
+            }
+
+            .visualizer-title {
+                font-size: 1.1rem;
+            }
+
+            .blocks-row-title {
+                font-size: 1rem;
+            }
+        }
+
+        /* Mobile */
+        @media (max-width: 600px) {
+            .container {
+                padding: 1.25rem 0.75rem;
+                gap: 1.25rem;
+            }
+
+            /* Header stacks vertically */
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.75rem;
+                padding-bottom: 1rem;
+            }
+
+            .header-links {
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                gap: 0.5rem;
+            }
+
+            .logo {
+                font-size: 1.25rem;
+            }
+
+            .logo-icon {
+                width: 1.8rem;
+                height: 1.8rem;
+            }
+
+            .btn {
+                font-size: 0.8rem;
+                padding: 0.45rem 0.8rem;
+            }
+
+            .sync-status {
+                font-size: 0.78rem;
+            }
+
+            /* Stats grid: 2 cols on mobile */
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 0.75rem;
+            }
+
+            .stat-card {
+                padding: 1rem;
+            }
+
+            .stat-value {
+                font-size: 1.3rem;
+            }
+
+            .stat-label {
+                font-size: 0.7rem;
+            }
+
+            .stat-subtext {
+                font-size: 0.75rem;
+            }
+
+            /* Blocks row */
+            .blocks-row-container {
+                padding: 1rem;
+            }
+
+            .blocks-row-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.25rem;
+            }
+
+            .blocks-row-title {
+                font-size: 1rem;
+            }
+
+            .confirmed-block-card {
+                min-width: 145px;
+                padding: 1rem;
+            }
+
+            .block-height {
+                font-size: 1rem;
+            }
+
+            .block-stat-row {
+                font-size: 0.75rem;
+            }
+
+            /* Visualizer */
+            .visualizer-container {
+                padding: 1rem;
+            }
+
+            .visualizer-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.75rem;
+            }
+
+            .visualizer-title {
+                font-size: 1rem;
+            }
+
+            .search-bar {
+                width: 100%;
+                font-size: 0.85rem;
+            }
+
+            /* Legend bar wraps */
+            .legend-bar {
+                font-size: 0.75rem;
+                gap: 0.5rem;
+            }
+
+            .legend-colors {
+                flex-wrap: wrap;
+                gap: 3px;
+            }
+
+            .legend-color-box {
+                width: 10px;
+                height: 10px;
+            }
+
+            /* Mempool grid */
+            .mempool-grid {
+                min-height: 250px;
+                max-height: 350px;
+                padding: 1rem;
+                gap: 5px;
+            }
+
+            /* Details panel: un-stick on mobile */
+            .details-panel {
+                position: static;
+                padding: 1.25rem;
+            }
+
+            .panel-title {
+                font-size: 1rem;
+            }
+
+            .detail-label {
+                font-size: 0.7rem;
+            }
+
+            .detail-value {
+                font-size: 0.85rem;
+            }
+
+            .detail-value.mono {
+                font-size: 0.78rem;
+            }
+
+            .details-placeholder {
+                padding: 2rem 0;
+            }
+
+            .details-placeholder svg {
+                width: 36px;
+                height: 36px;
+            }
+        }
+
+        /* Extra small screens */
+        @media (max-width: 380px) {
+            .container {
+                padding: 1rem 0.5rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stat-value {
+                font-size: 1.15rem;
+            }
+
+            .header-links {
+                flex-direction: column;
+            }
+
+            .confirmed-block-card {
+                min-width: 130px;
+            }
+
+            .legend-bar > span:last-child {
+                display: none;
+            }
         }
     </style>
 </head>

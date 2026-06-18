@@ -460,11 +460,22 @@
                 flex-direction: column;
                 align-items: flex-start;
                 gap: 0.75rem;
+                padding: 1rem;
             }
             .endpoint-summary {
                 margin-left: 0;
                 text-align: left;
                 max-width: 100%;
+                white-space: normal;
+            }
+            .endpoint-identity {
+                flex-wrap: wrap;
+                gap: 0.5rem;
+            }
+            .endpoint-path {
+                white-space: normal;
+                word-break: break-all;
+                font-size: 0.85rem;
             }
         }
 
@@ -700,6 +711,212 @@
             to {
                 opacity: 1;
                 transform: translateY(0);
+            }
+        }
+
+        /* ===== RESPONSIVE MOBILE FIXES ===== */
+
+        /* Tablet & small laptops */
+        @media (max-width: 900px) {
+            .container {
+                padding: 1.5rem 1rem;
+                gap: 1.5rem;
+            }
+
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .hero-card {
+                padding: 2rem;
+            }
+
+            .status-card {
+                padding: 1.5rem;
+            }
+        }
+
+        /* Mobile */
+        @media (max-width: 600px) {
+            .container {
+                padding: 1.25rem 0.75rem;
+                gap: 1.25rem;
+            }
+
+            /* Header stacks vertically */
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+                padding-bottom: 1rem;
+            }
+
+            .header-links {
+                flex-wrap: wrap;
+                gap: 0.5rem;
+                width: 100%;
+            }
+
+            .header-links .btn {
+                font-size: 0.8rem;
+                padding: 0.5rem 0.8rem;
+            }
+
+            .logo {
+                font-size: 1.25rem;
+            }
+
+            .logo-icon {
+                width: 1.8rem;
+                height: 1.8rem;
+            }
+
+            /* Hero section */
+            .hero-card {
+                padding: 1.5rem;
+            }
+
+            .hero-title {
+                font-size: 1.5rem;
+                letter-spacing: -0.02em;
+            }
+
+            .hero-desc {
+                font-size: 0.9rem;
+            }
+
+            .hero-tag {
+                font-size: 0.65rem;
+            }
+
+            /* Status card */
+            .status-card {
+                padding: 1.25rem;
+            }
+
+            .status-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 1rem;
+            }
+
+            .status-value {
+                font-size: 1.1rem;
+            }
+
+            .status-value.mono {
+                font-size: 0.9rem;
+            }
+
+            /* Section title */
+            .section-title {
+                font-size: 1.25rem;
+            }
+
+            /* Filter bar wraps properly */
+            .filter-bar {
+                gap: 0.5rem;
+            }
+
+            .search-input {
+                min-width: 100%;
+                font-size: 0.85rem;
+            }
+
+            .filter-btn {
+                padding: 0.45rem 0.75rem;
+                font-size: 0.8rem;
+            }
+
+            /* Endpoint content */
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .endpoint-content {
+                padding: 1rem;
+            }
+
+            /* Param table scrollable */
+            .param-table {
+                display: block;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .param-table th,
+            .param-table td {
+                white-space: nowrap;
+                padding: 0.5rem 0.6rem;
+                font-size: 0.78rem;
+            }
+
+            /* Code boxes */
+            .code-box pre {
+                padding: 0.75rem;
+                font-size: 0.75rem;
+            }
+
+            .code-header {
+                padding: 0.4rem 0.75rem;
+                font-size: 0.75rem;
+            }
+
+            /* Method badge */
+            .method-badge {
+                font-size: 0.7rem;
+                padding: 0.25rem 0.5rem;
+                width: 60px;
+            }
+
+            /* Try console */
+            .console-output {
+                font-size: 0.7rem;
+                max-height: 200px;
+            }
+
+            /* Footer */
+            footer {
+                padding: 1.5rem 0.5rem;
+                font-size: 0.75rem;
+            }
+
+            /* Buttons */
+            .btn {
+                font-size: 0.8rem;
+                padding: 0.5rem 0.9rem;
+            }
+        }
+
+        /* Extra small screens */
+        @media (max-width: 380px) {
+            .container {
+                padding: 1rem 0.5rem;
+            }
+
+            .hero-title {
+                font-size: 1.3rem;
+            }
+
+            .hero-desc {
+                font-size: 0.85rem;
+            }
+
+            .status-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .header-links {
+                flex-direction: column;
+            }
+
+            .header-links .btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .filter-btn {
+                flex: 1 1 auto;
+                text-align: center;
             }
         }
     </style>
