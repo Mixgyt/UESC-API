@@ -5,9 +5,11 @@ echo "🚀 Iniciando Laravel..."
 
 # Verificar que los assets de Vite existan
 if [ ! -f "/var/www/public/build/manifest.json" ]; then
-    echo "❌ ERROR: No se encontró el manifest de Vite en /var/www/public/build/manifest.json"
-    echo "Los assets no fueron compilados correctamente."
-    exit 1
+    echo "⚠️  No se encontró el manifest de Vite en /var/www/public/build/manifest.json (Normal en desarrollo)"
+    if [ "$APP_ENV" = "production" ]; then
+        echo "❌ ERROR: Los assets no fueron compilados correctamente para producción."
+        exit 1
+    fi
 fi
 
 echo "✅ Manifest de Vite encontrado"
