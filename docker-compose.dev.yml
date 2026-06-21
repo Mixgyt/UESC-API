@@ -27,6 +27,8 @@ services:
     depends_on:
       - db
       - redis
+    networks:
+      - dokploy-network
 
   db:
     image: mysql:8.0
@@ -44,6 +46,8 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+    networks:
+      - dokploy-network
 
   redis:
     image: redis:alpine
@@ -53,9 +57,15 @@ services:
       - "6379:6379"
     volumes:
       - redis_data:/data
+    networks:
+      - dokploy-network
 
 volumes:
   db_data:
     driver: local
   redis_data:
     driver: local
+
+networks:
+  dokploy-network:
+    external: true
