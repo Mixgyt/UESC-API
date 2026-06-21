@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\BlockController;
 use App\Http\Controllers\Api\MempoolController;
+use App\Http\Controllers\Api\MiningController;
 use App\Http\Controllers\Api\NodeController;
 use App\Http\Controllers\Api\TransactionController;
 use Illuminate\Support\Facades\Route;
@@ -15,6 +16,8 @@ Route::post('/node/mine', [NodeController::class, 'mine'])->middleware('auth:san
 
 Route::middleware('throttle:60,1')->group(function (): void {
     Route::get('/node/info', [NodeController::class, 'info']);
+    Route::get('/mining/work', [MiningController::class, 'work']);
+    Route::post('/mining/submit', [MiningController::class, 'submit']);
 
     Route::get('/mempool', [MempoolController::class, 'index']);
     Route::get('/mempool/summary', [MempoolController::class, 'summary']);
