@@ -28,3 +28,4 @@ Thumbs.db
 graphify-out/
 .graphifyignore
 .agents/
+google-services.json

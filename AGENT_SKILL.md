@@ -273,6 +273,62 @@ Protected endpoints require a Sanctum token sent in the headers:
 
 ---
 
+## Device Tokens & Push Notifications (FCM)
+
+### 14. POST /api/devices/register
+- **Description**: Registers an FCM device token associated with a Bitcoin address to monitor.
+- **Headers**: `Content-Type: application/json`
+- **Request Body**:
+  ```json
+  {
+    "token": "fcm_token_example_123",
+    "address": "bcrt1qrecipientaddress456"
+  }
+  ```
+- **Response (201 Created)**:
+  ```json
+  {
+    "message": "Device token registered successfully.",
+    "data": {
+      "id": 1,
+      "token": "fcm_token_example_123",
+      "address": "bcrt1qrecipientaddress456",
+      "created_at": "2026-06-22T22:45:00.000000Z",
+      "updated_at": "2026-06-22T22:45:00.000000Z"
+    }
+  }
+  ```
+
+### 15. POST /api/devices/unregister
+- **Description**: Unregisters an FCM device token associated with a Bitcoin address.
+- **Headers**: `Content-Type: application/json`
+- **Request Body**:
+  ```json
+  {
+    "token": "fcm_token_example_123",
+    "address": "bcrt1qrecipientaddress456"
+  }
+  ```
+- **Response (200 OK)**:
+  ```json
+  {
+    "message": "Device token unregistered successfully."
+  }
+  ```
+
+### Expected FCM Push Notification Payload (Android Side)
+When a transaction is confirmed in a block, the backend dispatches a push notification through FCM v1 API with the following structure:
+- **Notification**:
+  - `title`: `"Transacción Confirmada"`
+  - `body`: `"Has recibido {amount_btc} BTC ({amount_sat} SATs) en tu dirección {address}..."`
+- **Data (Key-Value Strings)**:
+  - `txid`: The 64-char transaction hash.
+  - `address`: The matched Bitcoin address.
+  - `amount_btc`: The transaction output value in BTC (string representation, e.g. `"1.5"`).
+  - `amount_sat`: The transaction output value in satoshis (string representation, e.g. `"150000000"`).
+
+---
+
 ## Practical guidelines for modifications
 
 1. **Keep read endpoints public**: Avoid adding token requirements to read endpoints unless explicitly requested.

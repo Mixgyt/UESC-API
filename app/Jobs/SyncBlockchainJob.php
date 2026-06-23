@@ -75,6 +75,8 @@ class SyncBlockchainJob implements ShouldQueue, ShouldBeUnique
                     'created_at' => now(),
                     'updated_at' => now(),
                 ];
+
+                $this->processTransactionNotifications($tx);
             }
 
             if ($transactionRows !== []) {
@@ -152,5 +154,42 @@ class SyncBlockchainJob implements ShouldQueue, ShouldBeUnique
     private function btcToSat(mixed $btc): int
     {
         return (int) round(((float) $btc) * 100000000);
+    }
+
+    private function processTransactionNotifications(array $tx): void
+    {
+        $outputs = $tx['vout'] ?? [];
+        foreach ($outputs as $vout) {
+            $address = $vout['scriptPubKey']['address'] ?? null;
+            if (!$address && isset($vout['scriptPubKey']['addresses']) && is_array($vout['scriptPubKey']['addresses'])) {
+                $address = $vout['scriptPubKey']['addresses'][0] ?? null;
+            }
+
+            if ($address) {
+                $tokens = \App\Models\DeviceToken::query()
+                    ->where('address', $address)
+                    ->pluck('token');
+
+                if ($tokens->isNotEmpty()) {
+                    $amountBtc = $vout['value'] ?? 0;
+                    $amountSat = $this->btcToSat($amountBtc);
+                    $txid = $tx['txid'];
+
+                    foreach ($tokens as $token) {
+                        dispatch(new \App\Jobs\SendPushNotificationJob(
+                            $token,
+                            'Transacción Confirmada',
+                            "Has recibido " . ($amountBtc) . " BTC (" . number_format($amountSat) . " SATs) en tu dirección " . substr($address, 0, 8) . "...",
+                            [
+                                'txid' => $txid,
+                                'address' => $address,
+                                'amount_btc' => (string) $amountBtc,
+                                'amount_sat' => (string) $amountSat,
+                            ]
+                        ));
+                    }
+                }
+            }
+        }
     }
 }

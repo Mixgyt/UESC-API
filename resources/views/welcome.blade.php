@@ -1006,6 +1006,7 @@
                 <button class="filter-btn" data-filter="blocks">Bloques</button>
                 <button class="filter-btn" data-filter="tx">Transacciones</button>
                 <button class="filter-btn" data-filter="mempool">Mempool</button>
+                <button class="filter-btn" data-filter="devices">Dispositivos</button>
             </div>
 
             <div class="endpoints-list" id="endpoints-container">
@@ -1071,6 +1072,149 @@
                                     </div>
                                     <pre><code>{
   "token": "1|examplePlainTextToken"
+}</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- POST /api/devices/register -->
+                <div class="endpoint-card" data-category="devices">
+                    <div class="endpoint-trigger">
+                        <div class="endpoint-identity">
+                            <span class="method-badge post">POST</span>
+                            <span class="endpoint-path">/api/devices/register</span>
+                        </div>
+                        <span class="endpoint-summary">Registra un token FCM de dispositivo con una dirección BTC.</span>
+                        <span class="endpoint-icon">▼</span>
+                    </div>
+                    <div class="endpoint-content">
+                        <div class="content-grid">
+                            <div class="details-col">
+                                <div>
+                                    <h4 class="details-section-title">Descripción</h4>
+                                    <p class="details-text">Asocia el token de Firebase Cloud Messaging (FCM) del dispositivo con una dirección de Bitcoin para recibir notificaciones push en tiempo real cuando se confirme una transacción hacia dicha dirección.</p>
+                                </div>
+                                <div>
+                                    <h4 class="details-section-title">Parámetros del Body (JSON)</h4>
+                                    <table class="param-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Campo</th>
+                                                <th>Tipo</th>
+                                                <th>Requerido</th>
+                                                <th>Descripción</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="param-name">token</td>
+                                                <td class="param-type">string</td>
+                                                <td><span class="param-badge required">Sí</span></td>
+                                                <td>Token de registro FCM del dispositivo.</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="param-name">address</td>
+                                                <td class="param-type">string</td>
+                                                <td><span class="param-badge required">Sí</span></td>
+                                                <td>Dirección BTC que se desea monitorear.</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="code-col">
+                                <div class="code-box">
+                                    <div class="code-header">
+                                        <span>Ejemplo de cURL</span>
+                                        <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+                                    </div>
+                                    <pre><code>curl -X POST {{ url('/api/devices/register') }} \
+  -H "Content-Type: application/json" \
+  -d '{"token":"fcm_token_example_123","address":"bcrt1qrecipientaddress456"}'</code></pre>
+                                </div>
+                                <div class="code-box">
+                                    <div class="code-header">
+                                        <span>Respuesta (201 Created)</span>
+                                    </div>
+                                    <pre><code>{
+  "message": "Device token registered successfully.",
+  "data": {
+    "id": 1,
+    "token": "fcm_token_example_123",
+    "address": "bcrt1qrecipientaddress456",
+    "created_at": "2026-06-22T22:45:00.000000Z",
+    "updated_at": "2026-06-22T22:45:00.000000Z"
+  }
+}</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- POST /api/devices/unregister -->
+                <div class="endpoint-card" data-category="devices">
+                    <div class="endpoint-trigger">
+                        <div class="endpoint-identity">
+                            <span class="method-badge post">POST</span>
+                            <span class="endpoint-path">/api/devices/unregister</span>
+                        </div>
+                        <span class="endpoint-summary">Elimina el registro de un token FCM asociado a una dirección BTC.</span>
+                        <span class="endpoint-icon">▼</span>
+                    </div>
+                    <div class="endpoint-content">
+                        <div class="content-grid">
+                            <div class="details-col">
+                                <div>
+                                    <h4 class="details-section-title">Descripción</h4>
+                                    <p class="details-text">Remueve la asociación entre un token FCM y la dirección de Bitcoin monitoreada, deteniendo el envío de notificaciones push de transacciones.</p>
+                                </div>
+                                <div>
+                                    <h4 class="details-section-title">Parámetros del Body (JSON)</h4>
+                                    <table class="param-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Campo</th>
+                                                <th>Tipo</th>
+                                                <th>Requerido</th>
+                                                <th>Descripción</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="param-name">token</td>
+                                                <td class="param-type">string</td>
+                                                <td><span class="param-badge required">Sí</span></td>
+                                                <td>Token FCM registrado.</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="param-name">address</td>
+                                                <td class="param-type">string</td>
+                                                <td><span class="param-badge required">Sí</span></td>
+                                                <td>Dirección BTC registrada.</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="code-col">
+                                <div class="code-box">
+                                    <div class="code-header">
+                                        <span>Ejemplo de cURL</span>
+                                        <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+                                    </div>
+                                    <pre><code>curl -X POST {{ url('/api/devices/unregister') }} \
+  -H "Content-Type: application/json" \
+  -d '{"token":"fcm_token_example_123","address":"bcrt1qrecipientaddress456"}'</code></pre>
+                                </div>
+                                <div class="code-box">
+                                    <div class="code-header">
+                                        <span>Respuesta (200 OK)</span>
+                                    </div>
+                                    <pre><code>{
+  "message": "Device token unregistered successfully."
 }</code></pre>
                                 </div>
                             </div>

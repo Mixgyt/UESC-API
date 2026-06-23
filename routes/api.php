@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\BlockController;
+use App\Http\Controllers\Api\DeviceTokenController;
 use App\Http\Controllers\Api\MempoolController;
 use App\Http\Controllers\Api\MiningController;
 use App\Http\Controllers\Api\NodeController;
@@ -9,6 +10,8 @@ use App\Http\Controllers\Api\TransactionController;
 use Illuminate\Support\Facades\Route;
 
 Route::post('/auth/token', [AuthController::class, 'token']);
+Route::post('/devices/register', [DeviceTokenController::class, 'register']);
+Route::post('/devices/unregister', [DeviceTokenController::class, 'unregister']);
 
 Route::delete('/auth/token', [AuthController::class, 'revoke'])->middleware('auth:sanctum');
 Route::post('/node/mine', [NodeController::class, 'mine'])->middleware('auth:sanctum');
