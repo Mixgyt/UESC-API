@@ -108,4 +108,30 @@ class DeviceTokenNotificationTest extends TestCase
                 && $job->data['amount_sat'] === '150000000';
         });
     }
+
+    public function test_firebase_service_can_load_credentials_from_base64_env(): void
+    {
+        $mockJson = json_encode([
+            'project_id' => 'env-project-123',
+            'private_key' => 'env-private-key-456',
+            'client_email' => 'env-email-789@gserviceaccount.com',
+        ]);
+        
+        $base64 = base64_encode($mockJson);
+        
+        putenv("FIREBASE_CREDENTIALS_BASE64={$base64}");
+        
+        $service = new \App\Services\FirebaseService();
+        
+        $reflection = new \ReflectionClass($service);
+        $method = $reflection->getMethod('getCredentials');
+        $method->setAccessible(true);
+        $credentials = $method->invoke($service);
+        
+        $this->assertEquals('env-project-123', $credentials['project_id']);
+        $this->assertEquals('env-private-key-456', $credentials['private_key']);
+        $this->assertEquals('env-email-789@gserviceaccount.com', $credentials['client_email']);
+        
+        putenv("FIREBASE_CREDENTIALS_BASE64");
+    }
 }

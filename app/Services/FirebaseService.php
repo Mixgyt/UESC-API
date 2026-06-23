@@ -15,25 +15,37 @@ class FirebaseService
         $this->http = new Client();
     }
 
-    /**
-     * Get Firebase Service Account credentials.
-     */
     private function getCredentials(): array
     {
-        $path = env('FIREBASE_CREDENTIALS_PATH', base_path('google-services.json'));
-        
-        if (!file_exists($path)) {
-            $fallbackPath = base_path('firebase-service-account.json');
-            if (file_exists($fallbackPath)) {
-                $path = $fallbackPath;
-            } else {
-                throw new RuntimeException("Firebase service account credentials file not found at: {$path}");
+        $credentialsJson = env('FIREBASE_CREDENTIALS_JSON');
+        $credentialsBase64 = env('FIREBASE_CREDENTIALS_BASE64');
+
+        if ($credentialsBase64) {
+            $decoded = base64_decode($credentialsBase64, true);
+            if ($decoded !== false) {
+                $credentialsJson = $decoded;
             }
         }
 
-        $content = json_decode(file_get_contents($path), true);
+        if ($credentialsJson) {
+            $content = json_decode($credentialsJson, true);
+        } else {
+            $path = env('FIREBASE_CREDENTIALS_PATH', base_path('google-services.json'));
+            
+            if (!file_exists($path)) {
+                $fallbackPath = base_path('firebase-service-account.json');
+                if (file_exists($fallbackPath)) {
+                    $path = $fallbackPath;
+                } else {
+                    throw new RuntimeException("Firebase service account credentials file not found at: {$path}");
+                }
+            }
+
+            $content = json_decode(file_get_contents($path), true);
+        }
+
         if (!$content || !isset($content['private_key']) || !isset($content['client_email']) || !isset($content['project_id'])) {
-            throw new RuntimeException("Invalid Firebase credentials file. Must contain project_id, private_key, and client_email.");
+            throw new RuntimeException("Invalid Firebase credentials. Must contain project_id, private_key, and client_email.");
         }
 
         return $content;
